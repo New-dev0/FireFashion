@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Python / Backend
 __pycache__/
 *.pyc
@@ -25,10 +26,23 @@ coverage.xml
 
 # React Native / Expo / Frontend
 node_modules/
+=======
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+
+# Expo
+>>>>>>> 0de2e029592c5922b4c7cc90a4c0363188bce334
 .expo/
 dist/
 web-build/
 expo-env.d.ts
+<<<<<<< HEAD
+=======
+
+# Native
+>>>>>>> 0de2e029592c5922b4c7cc90a4c0363188bce334
 .kotlin/
 *.orig.*
 *.jks
@@ -36,6 +50,7 @@ expo-env.d.ts
 *.p12
 *.key
 *.mobileprovision
+<<<<<<< HEAD
 .metro-health-check*
 npm-debug.*
 yarn-debug.*
@@ -48,3 +63,29 @@ app-example
 /ios
 /android
 
+=======
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+app-example
+
+# generated native folders
+/ios
+/android
+>>>>>>> 0de2e029592c5922b4c7cc90a4c0363188bce334
