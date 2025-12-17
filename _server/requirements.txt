@@ -4,3 +4,7 @@ curl_cffi==0.6.0b9
 requests==2.31.0
 pydantic==2.6.0
 python-multipart
+aiohttp
+aiofiles
+Pillow
+loguru
