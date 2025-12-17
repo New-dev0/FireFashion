@@ -1,98 +1,248 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { Button, Card, Chip, Avatar } from 'heroui-native';
+import { ScrollView, View, Text } from 'react-native';
+import { withUniwind } from 'uniwind';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+const StyledIonicons = withUniwind(Ionicons);
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
+    <ScrollView className="flex-1 bg-background">
+      <View className="px-6 pt-12 pb-8">
+        {/* Header Section */}
+        <View className="mb-8">
+          <View className="flex-row items-center justify-between mb-4">
+            <View>
+              <Text className="text-3xl font-bold text-foreground mb-1">
+                🔥 FireFashion
+              </Text>
+              <Text className="text-base text-muted">
+                Try on fashion virtually, instantly
+              </Text>
+            </View>
+            <Avatar size="lg" alt="User Avatar">
+              <Avatar.Image
+                source={{
+                  uri: 'https://img.heroui.chat/image/avatar?w=400&h=400&u=3',
+                }}
               />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+              <Avatar.Fallback>FF</Avatar.Fallback>
+            </Avatar>
+          </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+          {/* Status Chips */}
+          <View className="flex-row gap-2 flex-wrap">
+            <Chip size="sm" variant="secondary" color="danger">
+              <View className="size-1.5 mr-1.5 rounded-full bg-danger" />
+              <Chip.Label>Hot Deals</Chip.Label>
+            </Chip>
+            <Chip size="sm" variant="soft" color="warning">
+              <Chip.Label>🔥 Trending Now</Chip.Label>
+            </Chip>
+          </View>
+        </View>
+
+        {/* Quick Actions */}
+        <View className="mb-6">
+          <Text className="text-xl font-semibold text-foreground mb-4">
+            Quick Actions
+          </Text>
+          <View className="gap-3">
+            <Button variant="primary" onPress={() => console.log('Upload Photo')}>
+              <StyledIonicons
+                name="camera"
+                size={20}
+                className="text-accent-foreground"
+              />
+              <Button.Label>Upload Your Photo</Button.Label>
+            </Button>
+            <View className="flex-row gap-3">
+              <Button variant="secondary" className="flex-1">
+                <StyledIonicons
+                  name="search"
+                  size={18}
+                  className="text-accent-soft-foreground"
+                />
+                <Button.Label>Search Items</Button.Label>
+              </Button>
+              <Button variant="tertiary" className="flex-1">
+                <StyledIonicons
+                  name="time-outline"
+                  size={18}
+                  className="text-default-foreground"
+                />
+                <Button.Label>History</Button.Label>
+              </Button>
+            </View>
+          </View>
+        </View>
+
+        {/* Featured Cards */}
+        <View className="mb-6">
+          <Text className="text-xl font-semibold text-foreground mb-4">
+            Featured
+          </Text>
+
+          <Card className="mb-4">
+            <View className="gap-4">
+              <Card.Body>
+                <View className="flex-row items-center gap-2 mb-3">
+                  <Chip size="sm" variant="primary" color="accent">
+                    <Chip.Label>New</Chip.Label>
+                  </Chip>
+                  <Chip size="sm" variant="soft" color="warning">
+                    <StyledIonicons name="star" size={12} className="text-yellow-500" />
+                    <Chip.Label>Premium</Chip.Label>
+                  </Chip>
+                </View>
+                <Card.Title>HeroUI Native</Card.Title>
+                <Card.Description>
+                  Build beautiful React Native apps with pre-built components
+                  and Tailwind CSS styling.
+                </Card.Description>
+              </Card.Body>
+              <Card.Footer className="gap-3">
+                <Button variant="primary" size="sm">
+                  <Button.Label>Learn More</Button.Label>
+                  <StyledIonicons
+                    name="arrow-forward"
+                    size={16}
+                    className="text-accent-foreground"
+                  />
+                </Button>
+                <Button variant="ghost" size="sm">
+                  <StyledIonicons
+                    name="bookmark-outline"
+                    size={16}
+                    className="text-muted"
+                  />
+                  <Button.Label>Save</Button.Label>
+                </Button>
+              </Card.Footer>
+            </View>
+          </Card>
+
+          <Card variant="secondary">
+            <View className="gap-4">
+              <Card.Body>
+                <Card.Title>Uniwind Integration</Card.Title>
+                <Card.Description>
+                  Seamlessly integrated with Uniwind for the fastest Tailwind
+                  bindings in React Native.
+                </Card.Description>
+              </Card.Body>
+              <Card.Footer>
+                <Button variant="tertiary" size="sm" className="self-start">
+                  <StyledIonicons
+                    name="code-slash"
+                    size={14}
+                    className="text-default-foreground"
+                  />
+                  <Button.Label>View Docs</Button.Label>
+                </Button>
+              </Card.Footer>
+            </View>
+          </Card>
+        </View>
+
+        {/* Stats Section */}
+        <View className="mb-6">
+          <Text className="text-xl font-semibold text-foreground mb-4">
+            Your Stats
+          </Text>
+          <View className="flex-row gap-3">
+            <Card variant="tertiary" className="flex-1">
+              <View className="gap-2 items-center py-2">
+                <StyledIonicons
+                  name="folder-outline"
+                  size={24}
+                  className="text-accent"
+                />
+                <Text className="text-2xl font-bold text-foreground">12</Text>
+                <Text className="text-sm text-muted">Projects</Text>
+              </View>
+            </Card>
+            <Card variant="tertiary" className="flex-1">
+              <View className="gap-2 items-center py-2">
+                <StyledIonicons
+                  name="checkmark-circle-outline"
+                  size={24}
+                  className="text-success"
+                />
+                <Text className="text-2xl font-bold text-foreground">8</Text>
+                <Text className="text-sm text-muted">Completed</Text>
+              </View>
+            </Card>
+            <Card variant="tertiary" className="flex-1">
+              <View className="gap-2 items-center py-2">
+                <StyledIonicons
+                  name="time-outline"
+                  size={24}
+                  className="text-warning"
+                />
+                <Text className="text-2xl font-bold text-foreground">4</Text>
+                <Text className="text-sm text-muted">Pending</Text>
+              </View>
+            </Card>
+          </View>
+        </View>
+
+        {/* Team Section */}
+        <View>
+          <Text className="text-xl font-semibold text-foreground mb-4">
+            Team Members
+          </Text>
+          <Card variant="quaternary">
+            <View className="gap-3">
+              <View className="flex-row items-center justify-between">
+                <View className="flex-row items-center gap-3">
+                  <Avatar size="md" alt="Team Member 1">
+                    <Avatar.Image
+                      source={{
+                        uri: 'https://img.heroui.chat/image/avatar?w=400&h=400&u=5',
+                      }}
+                    />
+                    <Avatar.Fallback>TM</Avatar.Fallback>
+                  </Avatar>
+                  <View>
+                    <Text className="text-base font-medium text-foreground">
+                      Sarah Johnson
+                    </Text>
+                    <Text className="text-sm text-muted">Lead Designer</Text>
+                  </View>
+                </View>
+                <Chip size="sm" variant="secondary" color="success">
+                  <View className="size-1.5 mr-1.5 rounded-full bg-success" />
+                  <Chip.Label>Active</Chip.Label>
+                </Chip>
+              </View>
+
+              <View className="flex-row items-center justify-between">
+                <View className="flex-row items-center gap-3">
+                  <Avatar size="md" alt="Team Member 2">
+                    <Avatar.Image
+                      source={{
+                        uri: 'https://img.heroui.chat/image/avatar?w=400&h=400&u=20',
+                      }}
+                    />
+                    <Avatar.Fallback>TM</Avatar.Fallback>
+                  </Avatar>
+                  <View>
+                    <Text className="text-base font-medium text-foreground">
+                      Mike Chen
+                    </Text>
+                    <Text className="text-sm text-muted">Developer</Text>
+                  </View>
+                </View>
+                <Chip size="sm" variant="secondary" color="default">
+                  <View className="size-1.5 mr-1.5 rounded-full bg-muted" />
+                  <Chip.Label>Away</Chip.Label>
+                </Chip>
+              </View>
+            </View>
+          </Card>
+        </View>
+      </View>
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
