@@ -1,3 +1,4 @@
+# Python / Backend
 __pycache__/
 *.pyc
 *.pyo
@@ -19,7 +20,31 @@ coverage.xml
 .mypy_cache
 .pytest_cache
 .hypothesize
-
-# Data files
 *.json
 *.csv
+
+# React Native / Expo / Frontend
+node_modules/
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+.metro-health-check*
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+.DS_Store
+*.pem
+.env*.local
+*.tsbuildinfo
+app-example
+/ios
+/android
+
