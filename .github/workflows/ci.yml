@@ -1,0 +1,42 @@
+name: Server CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - '_server/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - '_server/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./_server
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest httpx
+
+    - name: Test API endpoints
+      # We run the server in background and try to hit it, or use a test runner
+      # For simplicity, we'll try to import the modules to ensure no syntax errors
+      # and maybe run a small check script if we had one designed for CI.
+      # Here we just verify imports work.
+      run: |
+        python -c "from scraper import MeeshoScraper; print('MeeshoScraper imported successfully')"
+        python -c "from myntra_scraper import MyntraScraper; print('MyntraScraper imported successfully')"
+        python -c "from main import app; print('FastAPI app imported successfully')"
